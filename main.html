@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div id="app">
+    <div class="container-fluid">
+      <div class="row" id="header">
+        <div class="col-3" id="header-logo">
+          <img src="assets/new_images/logomark_s.png" id="unlock-potential-img" style="width: 125px; height: 148px;"></img>
+        </div>
+        <div class="col-8">
+          <img src="assets/new_images/wordmark_s.png" id="unlock-potential-img" style="margin-top: 43px;"></img>
+        </div>
+      </div>
+      <div v-show="!game_in_progress">
+        <div class="row justify-content-center">
+          <div style="margin-top: 150px; padding-top: 18px; width: 300px; height: 150px; background-color: black; color: white; text-align: center;" v-on:click="startGame()">
+            <h5>START!</h5>
+          </div>
+        </div>
+      </div>
+      <div id="body-content">
+        <div v-show="game_in_progress">
+          <div class="row">
+            <div class="col-12">
+              <h3 style="width: 95%; margin: 60px auto; text-align: center;">{{ current_question.text }}</h3>
+            <div>
+          </div>
+          <div class="row justify-content-around">
+            <div class="col-3">
+              <h5 v-on:click="recordAnswer(0)" style="text-align: right;">{{ current_question.answers[0] }}</h5>
+            </div>
+            <div class="col-3">
+              <img :src="arrowDirection()" style="width: 110px; height: 110px; margin: 0 auto 0 auto; display: block;"></img>
+            </div>
+            <div class="col-3">
+              <h5 v-on:click="recordAnswer(1)" style="text-align: left;">{{ current_question.answers[1] }}</h5>
+            </div>
+            <div class="col-3">
+              <img :src="progressArrow()" style="width: 300px; height: 300px;"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+  </footer>
+
+  <link rel="stylesheet" href="assets/stylesheets/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/stylesheets/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="assets/javascript/main.js"></script>
+</body>
+</html>

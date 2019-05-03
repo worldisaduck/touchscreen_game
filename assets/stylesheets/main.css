@@ -1,0 +1,15 @@
+@font-face {
+  font-family: BasisGrotesquePro;
+  src: url('../fonts/BasisGrotesquePro-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: BasisGrotesquePro;
+  font-size: 30px;
+}
+
+.body-content {
+  width: 98%;
+  margin-right: auto;
+  margin-left: auto;
+}
