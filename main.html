@@ -29,13 +29,13 @@
           </div>
           <div class="row justify-content-around">
             <div class="col-3">
-              <h5 v-on:click="recordAnswer(0)" style="text-align: right;">{{ current_question.answers[0] }}</h5>
+              <h5 v-on:click="recordAnswer(0)" style="text-align: right; margin-top: 150px;">{{ current_question.answers[0] }}</h5>
             </div>
             <div class="col-3">
-              <img :src="arrowDirection()" style="width: 110px; height: 110px; margin: 0 auto 0 auto; display: block;"></img>
+              <img :src="arrowDirection()" style="width: 110px; height: 110px; margin: 100px auto 0 auto; display: block;"></img>
             </div>
             <div class="col-3">
-              <h5 v-on:click="recordAnswer(1)" style="text-align: left;">{{ current_question.answers[1] }}</h5>
+              <h5 v-on:click="recordAnswer(1)" style="text-align: left; margin-top: 150px;">{{ current_question.answers[1] }}</h5>
             </div>
             <div class="col-3">
               <img :src="progressArrow()" style="width: 300px; height: 300px;"></img>

@@ -182,7 +182,9 @@ var app = new Vue({
       } else {
         let positions = ['left', 'right'];
         this.changeDirection(positions[answerIndex]);
-        this.current_question = this.questions[Math.floor(Math.random() * 10) + 1];
+        setTimeout(() => {
+          this.current_question = this.questions[Math.floor(Math.random() * 10) + 1];
+        }, 500);
         if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
       };
     },
