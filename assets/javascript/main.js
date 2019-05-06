@@ -5,6 +5,7 @@ var app = new Vue({
       game_in_progress: false,
       arrow_direction: 'top',
       current_progress: 0,
+      showQuestion: true,
       current_question: {
       },
       questions: [
@@ -180,11 +181,14 @@ var app = new Vue({
         this.game_in_progress = false;
         this.current_progress = 0;
       } else {
+        this.showQuestion = false;
+
         let positions = ['left', 'right'];
         this.changeDirection(positions[answerIndex]);
         setTimeout(() => {
           this.current_question = this.questions[Math.floor(Math.random() * 10) + 1];
-        }, 500);
+          this.showQuestion = true;
+        }, 700);
         if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
       };
     },

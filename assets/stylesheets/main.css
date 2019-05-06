@@ -13,3 +13,15 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+
+.question-active, .question-leave-active {
+  transition: opacity .7s ease;
+}
+.question-enter, .question-leave-to
+/* .component-fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+
+.question-enter-active {
+  transition: all .7s ease;
+}

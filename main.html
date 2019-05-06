@@ -24,7 +24,9 @@
         <div v-show="game_in_progress">
           <div class="row">
             <div class="col-12">
-              <h3 style="width: 95%; margin: 60px auto; text-align: center;">{{ current_question.text }}</h3>
+              <transition name="question" mode="out-in">
+                <h3 v-show="showQuestion" style="width: 95%; margin: 60px auto; text-align: center;">{{ current_question.text }}</h3>
+              </transition>
             <div>
           </div>
           <div class="row justify-content-around">
