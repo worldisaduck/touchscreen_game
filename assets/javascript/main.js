@@ -12,18 +12,18 @@ var app = new Vue({
       questions: [
         [
           {
-            text: '3 years after graduating, how much more likely are you to be in a managerial role if you’ve completed postgraduate studies?',
+            text: "3 years after graduating, how much more likely are you to be in a managerial role if you've completed postgraduate studies?",
             answers: ['10%', '15%', '20%'],
             correct_answer: 2
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and undergraduates?',
-            answers: ['&pound;2000', '&pound;4000', '&pound;8000'],
+            answers: ['2000', '4000', '8000'],
             correct_answer: 1
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and postgraduates?',
-            answers: ['&pound;5000', '&pound;7000', '&pound;9000'],
+            answers: ['5000', '7000', '9000'],
             correct_answer: 2
           },
           {
@@ -35,12 +35,12 @@ var app = new Vue({
             text: 'What % of first degree graduates were in full or part time employment 6 months after graduating?',
             answers: ['38%', '53%', '67%'],
             correct_answer: 2
-          }          
+          }
         ],
         [
           {
             text: 'What is the median salary for postgraduates in employment?',
-            answers: ['&pound;25000', '&pound;28000', '&pound;33000'],
+            answers: ['25000', '28000', '33000'],
             correct_answer: 2
           },
           {
@@ -54,7 +54,7 @@ var app = new Vue({
             correct_answer: 2
           },
           {
-            text: 'Which university’s students have the higher median starting salary, 5 years after graduating?',
+            text: "Which university's students have the higher median starting salary, 5 years after graduating?",
             answers: ['LSE', 'Oxford', 'Cambridge'],
             correct_answer: 0
           },
@@ -62,12 +62,12 @@ var app = new Vue({
             text: 'Which postgraduates earn the higher starting salary?',
             answers: ['Architecture', 'IT', 'History'],
             correct_answer: 2
-          }          
+          }
         ],
         [
           {
             text: 'How much did the UK government invest in 2018 to support maths, digital and technical education?',
-            answers: ['&pound;120M', '&pound;256M', '&pound;406M'],
+            answers: ['120M', '256M', '406M'],
             correct_answer: 2
           },
           {
@@ -89,7 +89,7 @@ var app = new Vue({
             text: 'Which graduates typically earn the most 5 years after graduating?',
             answers: ['Business', 'Law', 'Biological Sciences'],
             correct_answer: 1
-          }          
+          }
         ]
       ]
     }
