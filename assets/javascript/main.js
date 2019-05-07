@@ -5,6 +5,7 @@ var app = new Vue({
       gameInProgress: false,
       current_progress: 0,
       showQuestion: true,
+      time: 0,
       currentSection: 0,
       screenResposive: true,
       current_question: {
@@ -171,10 +172,25 @@ var app = new Vue({
       this.currentSection = 0;
       this.changeQuestion();
     },
-    chageArrowDirection: function(degree) {
-      
-
-      
+    timer: function() {
+      if (this.gameInProgress) {
+        this.time++
+        setTimeout(() => {
+          this.timer();
+        }, 1000)
+      }
+    }
+  },
+  watch: {
+    gameInProgress: function(newState, oldState) {
+      if (newState) {
+        this.time = 0;
+        this.timer()
+      } else {
+        let hours = Math.floor(this.time / 3600);
+        let minutes = Math.floor(this.time / 60) % 60; 
+        let seconds = (this.time % 3600) % 60;
+      }
     }
   }
 });
