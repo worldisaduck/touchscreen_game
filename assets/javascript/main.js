@@ -109,12 +109,14 @@ var app = new Vue({
             this.game_in_progress = false;
             this.current_progress = 0;
             this.currentSection = 0;
+            this.current_question = this.randomQuestion();
+            this.showQuestion = true;
           } else {
             this.current_question = this.randomQuestion();
             this.showQuestion = true;
           }
         }, 700)
-      }, 1500);
+      }, 1400);
       if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
     },
     rotateArrow: function(answerIndex) {
