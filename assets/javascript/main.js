@@ -7,6 +7,7 @@ var app = new Vue({
       showQuestion: true,
       currentSection: 0,
       screenResposive: true,
+      gameEnded: false,
       current_question: {
       },
       questions: [
@@ -121,8 +122,8 @@ var app = new Vue({
       }
     },
     rotateArrow: function(answerIndex) {
-      let pointingArrow = document.getElementById('pointing-arrow');
-      let degree = [-90, 0, 90][answerIndex];
+      const degree = [-90, 0, 90][answerIndex];
+      const pointingArrow = document.getElementById('pointing-arrow');
 
       if (degree == -90) {
         for (turn = 0; turn >= degree; turn--) {
@@ -143,7 +144,6 @@ var app = new Vue({
           })(turn);
         }
       }
-
     },
     arrowDirection: function() {
       return 'assets/new_images/arrow_' + this.arrow_direction + '.png';
@@ -171,6 +171,11 @@ var app = new Vue({
       this.current_progress = 0;
       this.currentSection = 0;
       this.changeQuestion();
+    },
+    chageArrowDirection: function(degree) {
+      
+
+      
     }
   }
 });
