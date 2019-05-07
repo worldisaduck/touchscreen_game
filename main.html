@@ -31,14 +31,14 @@
           </div>
           <div class="row justify-content-around" style="margin-top: 100px;">
             <div class="col-3">
-              <h5 v-on:click="recordAnswer(0)" style="text-align: right; margin-top: 200px;">{{ current_question.answers[0] }}</h5>
+              <h5 v-html="current_question.answers[0]" v-on:click="recordAnswer(0)" style="text-align: right; margin-top: 200px;">{{ current_question.answers[0] }}</h5>
             </div>
             <div class="col-3">
-              <h5 v-on:click="recordAnswer(1)" style="text-align: center; margin-top: 50px;">{{ current_question.answers[1] }}</h5>
+              <h5 v-html="current_question.answers[1]" v-on:click="recordAnswer(1)" style="text-align: center; margin-top: 50px;">{{ current_question.answers[1] }}</h5>
               <img src="assets/new_images/arrow_top.png" id="pointing-arrow" style="width: 110px; height: 110px; margin: 70px auto 0 auto; display: block;"></img>
             </div>
             <div class="col-3">
-              <h5 v-on:click="recordAnswer(2)" style="text-align: left; margin-top: 200px;">{{ current_question.answers[2] }}</h5>
+              <h5 v-html="current_question.answers[2]" v-on:click="recordAnswer(2)" style="text-align: left; margin-top: 200px;">{{ current_question.answers[2] }}</h5>
             </div>
             <div class="col-3">
               <img :src="progressArrow()" style="width: 300px; height: 300px;"></img>
@@ -46,9 +46,6 @@
           </div>
         </div>
 
-        <div v-show="gameInProgress">
-          
-        </div>
       </div>
     </div>
   </div>

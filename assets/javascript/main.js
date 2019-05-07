@@ -7,7 +7,6 @@ var app = new Vue({
       showQuestion: true,
       currentSection: 0,
       screenResposive: true,
-      gameEnded: false,
       current_question: {
       },
       questions: [
@@ -19,12 +18,12 @@ var app = new Vue({
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and undergraduates?',
-            answers: ['2000', '4000', '8000'],
+            answers: ['&pound;2000', '&pound;4000', '&pound;8000'],
             correct_answer: 1
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and postgraduates?',
-            answers: ['5000', '7000', '9000'],
+            answers: ['&pound;5000', '&pound;7000', '&pound;9000'],
             correct_answer: 2
           },
           {
@@ -41,7 +40,7 @@ var app = new Vue({
         [
           {
             text: 'What is the median salary for postgraduates in employment?',
-            answers: ['25000', '28000', '33000'],
+            answers: ['&pound;25000', '&pound;28000', '&pound;33000'],
             correct_answer: 2
           },
           {
@@ -68,7 +67,7 @@ var app = new Vue({
         [
           {
             text: 'How much did the UK government invest in 2018 to support maths, digital and technical education?',
-            answers: ['120M', '256M', '406M'],
+            answers: ['&pound;120M', '&pound;256M', '&pound;406M'],
             correct_answer: 2
           },
           {
