@@ -94,7 +94,7 @@ var app = new Vue({
     }
   },
   mounted: function() {
-    this.current_question = this.questions[0][0]
+    this.current_question = this.randomQuestion();
   },
   methods: {
     recordAnswer: function(answerIndex) {
@@ -110,11 +110,11 @@ var app = new Vue({
             this.current_progress = 0;
             this.currentSection = 0;
           } else {
-            this.current_question = this.questions[this.currentSection][Math.floor(Math.random() * 5)];
+            this.current_question = this.randomQuestion();
             this.showQuestion = true;
           }
         }, 700)
-      }, 1200);
+      }, 1500);
       
 
       if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
@@ -156,6 +156,9 @@ var app = new Vue({
     sleep: function(delay) {
       let start = new Date().getTime();
       while (new Date().getTime() < start + delay);
+    },
+    randomQuestion: function() {
+      return this.questions[this.currentSection][Math.floor(Math.random() * 5)];
     }
   }
 });
