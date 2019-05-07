@@ -109,21 +109,15 @@ var app = new Vue({
           this.showQuestion = false;
           setTimeout(() => {
             if (this.currentSection == 3) {
-              this.game_in_progress = false;
-              this.current_progress = 0;
-              this.currentSection = 0;
-              this.current_question = this.randomQuestion();
-              this.showQuestion = true;
+              this.setupNewGame();
             } else {
-              this.current_question = this.randomQuestion();
-              this.showQuestion = true;
+              this.changeQuestion();
             }
           }, 700)
         }, 1400);
         
 
         if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
-        this.screenResposive = true;
       }
     },
     rotateArrow: function(answerIndex) {
@@ -166,6 +160,17 @@ var app = new Vue({
     },
     randomQuestion: function() {
       return this.questions[this.currentSection][Math.floor(Math.random() * 5)];
+    },
+    changeQuestion: function() {
+      this.current_question = this.randomQuestion();
+      this.showQuestion = true;
+      this.screenResposive = true;
+    },
+    setupNewGame: function() {
+      this.game_in_progress = false;
+      this.current_progress = 0;
+      this.currentSection = 0;
+      this.changeQuestion();
     }
   }
 });
