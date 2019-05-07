@@ -2,7 +2,7 @@ var app = new Vue({
   el: "#app",
   data: function() {
     return {
-      game_in_progress: false,
+      gameInProgress: false,
       current_progress: 0,
       showQuestion: true,
       currentSection: 0,
@@ -152,7 +152,7 @@ var app = new Vue({
       return 'assets/new_images/progress_arrow_' + this.current_progress + '.png';
     },
     startGame: function() {
-      this.game_in_progress = true;
+      this.gameInProgress = true;
     },
     sleep: function(delay) {
       let start = new Date().getTime();
@@ -167,7 +167,7 @@ var app = new Vue({
       this.screenResposive = true;
     },
     setupNewGame: function() {
-      this.game_in_progress = false;
+      this.gameInProgress = false;
       this.current_progress = 0;
       this.currentSection = 0;
       this.changeQuestion();

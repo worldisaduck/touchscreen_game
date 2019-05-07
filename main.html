@@ -13,7 +13,7 @@
           <img src="assets/new_images/wordmark_s.png" id="unlock-potential-img" style="margin-top: 43px;"></img>
         </div>
       </div>
-      <div v-show="!game_in_progress">
+      <div v-show="!gameInProgress">
         <div class="row justify-content-center">
           <div style="margin-top: 150px; padding-top: 18px; width: 300px; height: 150px; background-color: black; color: white; text-align: center;" v-on:click="startGame()">
             <h5>START!</h5>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div id="body-content">
-        <div v-show="game_in_progress">
+        <div v-show="gameInProgress">
           <div class="row">
             <div class="col-12">
               <transition name="question" mode="out-in">
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <div v-show="game_in_progress">
+        <div v-show="gameInProgress">
           
         </div>
       </div>
