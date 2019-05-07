@@ -6,6 +6,7 @@ var app = new Vue({
       current_progress: 0,
       showQuestion: true,
       currentSection: 0,
+      screenResposive: true,
       current_question: {
       },
       questions: [
@@ -98,28 +99,32 @@ var app = new Vue({
   },
   methods: {
     recordAnswer: function(answerIndex) {
-      this.currentSection++;
+      if (this.screenResposive) {
+        this.screenResposive = false;
+        this.currentSection++;
 
-      this.rotateArrow(answerIndex);
+        this.rotateArrow(answerIndex);
 
-      setTimeout(() => {
-        this.showQuestion = false;
         setTimeout(() => {
-          if (this.currentSection == 3) {
-            this.game_in_progress = false;
-            this.current_progress = 0;
-            this.currentSection = 0;
-            this.current_question = this.randomQuestion();
-            this.showQuestion = true;
-          } else {
-            this.current_question = this.randomQuestion();
-            this.showQuestion = true;
-          }
-        }, 700)
-      }, 1400);
-      
+          this.showQuestion = false;
+          setTimeout(() => {
+            if (this.currentSection == 3) {
+              this.game_in_progress = false;
+              this.current_progress = 0;
+              this.currentSection = 0;
+              this.current_question = this.randomQuestion();
+              this.showQuestion = true;
+            } else {
+              this.current_question = this.randomQuestion();
+              this.showQuestion = true;
+            }
+          }, 700)
+        }, 1400);
+        
 
-      if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
+        if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
+        this.screenResposive = true;
+      }
     },
     rotateArrow: function(answerIndex) {
       let pointingArrow = document.getElementById('pointing-arrow');
