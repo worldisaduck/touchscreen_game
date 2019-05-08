@@ -61,6 +61,17 @@
           </div>
         </div>
       </div>
+      
+      <div v-else-if="stage == 'leaderboard'">
+        <div class="row justify-content-center" style="margin-bottom: 45px;">
+          <ul v-for="(name, value) in sortedLeaderboard()">
+            <li>{{ value }} - {{ name }}</li>
+          </ul>
+        </div>
+        <div class="row justify-content-center">
+          <div @click="setupNewGame()" style="padding: 15px; background-color: #000000; width: 200px; height: 70px; text-align: center; color: #ffffff;">NEW GAME</div>
+        </div>
+      </div>
     </div>
     <footer>
       <p class="terms"><a href="./terms.html">Terms and Conditions</a></p>

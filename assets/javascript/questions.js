@@ -112,6 +112,7 @@ new Vue({
           this.showQuestion = false;
           setTimeout(() => {
             if (this.currentSection == 3) {
+              this.sleep(3000);
               this.stage = 'result';
             } else {
               this.changeQuestion();
@@ -170,8 +171,7 @@ new Vue({
       this.screenResposive = true;
     },
     setupNewGame: function() {
-      this.gameEnded = false;
-      this.gameStarted = false;
+      this.stage = 'start'
       this.currentProgress = 0;
       this.currentSection = 0;
       this.changeQuestion();
@@ -184,8 +184,8 @@ new Vue({
         }, 1000)
       }
     },
-    leaderboard: function() {
-
+    sortedLeaderboard: function() {
+      return window.localStorage;
     },
     saveTime: function() {
       window.localStorage.setItem(this.username, this.time);
