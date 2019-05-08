@@ -49,3 +49,12 @@ input {
 input:focus {
   outline: none;
 }
+
+#leaderboard { 
+  height: 500px;
+  overflow: scroll;
+}
+
+#leaderboard::-webkit-scrollbar { 
+    display: none; 
+}

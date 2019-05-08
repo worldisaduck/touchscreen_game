@@ -3,7 +3,7 @@ new Vue({
   data: function() {
     return {
       username: '',
-      stage: 'start',
+      stage: 'leaderboard',
       gameStarted: false,
       currentProgress: 0,
       showQuestion: true,
@@ -171,7 +171,8 @@ new Vue({
       this.screenResposive = true;
     },
     setupNewGame: function() {
-      this.stage = 'start'
+      this.stage = 'start';
+      this.username = '';
       this.currentProgress = 0;
       this.currentSection = 0;
       this.changeQuestion();
