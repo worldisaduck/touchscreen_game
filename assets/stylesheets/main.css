@@ -8,6 +8,10 @@ body {
   font-size: 30px;
 }
 
+.terms {
+  font-size: 14px;
+}
+
 a, a:visited {
   color: #222;
 }
