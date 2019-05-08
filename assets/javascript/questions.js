@@ -3,7 +3,7 @@ new Vue({
   data: function() {
     return {
       username: '',
-      stage: 'leaderboard',
+      stage: 'start',
       gameStarted: false,
       currentProgress: 0,
       showQuestion: true,
@@ -186,7 +186,18 @@ new Vue({
       }
     },
     sortedLeaderboard: function() {
-      return window.localStorage;
+      let sortedLeaderboard = {};
+      let leaderboard = window.localStorage
+      let names = Object.keys(leaderboard);
+
+      let sortedNames = names.sort((a, b) => { return leaderboard[a] - leaderboard[b] });
+
+      for (i in sortedNames) {
+        let name = sortedNames[i];
+        sortedLeaderboard[name] = leaderboard[name];
+      }
+
+      return sortedLeaderboard;
     },
     saveTime: function() {
       window.localStorage.setItem(this.username, this.time);
