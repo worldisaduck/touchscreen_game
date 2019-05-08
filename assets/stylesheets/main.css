@@ -33,3 +33,19 @@ a, a:visited {
 .question-enter-active {
   transition: all .7s ease;
 }
+
+input {
+  background: none;
+  color: #000000;
+  font-size: 18px;
+  padding: 10px 10px 5px 5px;
+  display: block;
+  width: 430px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid grey;
+}
+
+input:focus {
+  outline: none;
+}

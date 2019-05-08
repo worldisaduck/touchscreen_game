@@ -1,14 +1,15 @@
-var app = new Vue({
-  el: "#app",
+new Vue({
+  el: "#questions",
   data: function() {
     return {
-      gameInProgress: false,
-      current_progress: 0,
+      gameStarted: false,
+      currentProgress: 0,
       showQuestion: true,
       time: 0,
+      gameEnded: false,
       currentSection: 0,
       screenResposive: true,
-      current_question: {
+      currentQuestion: {
       },
       questions: [
         [
@@ -96,7 +97,7 @@ var app = new Vue({
     }
   },
   mounted: function() {
-    this.current_question = this.randomQuestion();
+    this.currentQuestion = this.randomQuestion();
   },
   methods: {
     recordAnswer: function(answerIndex) {
@@ -110,7 +111,8 @@ var app = new Vue({
           this.showQuestion = false;
           setTimeout(() => {
             if (this.currentSection == 3) {
-              this.setupNewGame();
+              this.sleep(3000);
+              this.gameStarted = false;
             } else {
               this.changeQuestion();
             }
@@ -118,7 +120,7 @@ var app = new Vue({
         }, 1400);
 
 
-        if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
+        if (this.currentQuestion.correct_answer == answerIndex) this.currentProgress += 25;
       }
     },
     rotateArrow: function(answerIndex) {
@@ -149,10 +151,10 @@ var app = new Vue({
       return 'assets/new_images/arrow_' + this.arrow_direction + '.png';
     },
     progressArrow: function() {
-      return 'assets/new_images/progress_arrow_' + this.current_progress + '.png';
+      return 'assets/new_images/progress_arrow_' + this.currentProgress + '.png';
     },
     startGame: function() {
-      this.gameInProgress = true;
+      this.gameStarted = true;
     },
     sleep: function(delay) {
       let start = new Date().getTime();
@@ -162,18 +164,19 @@ var app = new Vue({
       return this.questions[this.currentSection][Math.floor(Math.random() * 5)];
     },
     changeQuestion: function() {
-      this.current_question = this.randomQuestion();
+      this.currentQuestion = this.randomQuestion();
       this.showQuestion = true;
       this.screenResposive = true;
     },
     setupNewGame: function() {
-      this.gameInProgress = false;
-      this.current_progress = 0;
+      this.gameEnded = false;
+      this.gameStarted = false;
+      this.currentProgress = 0;
       this.currentSection = 0;
       this.changeQuestion();
     },
     timer: function() {
-      if (this.gameInProgress) {
+      if (this.gameStarted) {
         this.time++
         setTimeout(() => {
           this.timer();
@@ -182,7 +185,7 @@ var app = new Vue({
     }
   },
   watch: {
-    gameInProgress: function(newState, oldState) {
+    gameStarted: function(newState, oldState) {
       if (newState) {
         this.time = 0;
         this.timer()
@@ -190,7 +193,6 @@ var app = new Vue({
         let hours = Math.floor(this.time / 3600);
         let minutes = Math.floor(this.time / 60) % 60;
         let seconds = (this.time % 3600) % 60;
-        this.sleep(5000)
       }
     }
   }
