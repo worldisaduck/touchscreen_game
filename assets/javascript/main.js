@@ -51,7 +51,7 @@ var app = new Vue({
           },
           {
             text: 'What % of history graduates go on to take further study?',
-            answers: ['211%', '25%', '27.5%'],
+            answers: ['21.1%', '25%', '27.5%'],
             correct_answer: 2
           },
           {
@@ -116,7 +116,7 @@ var app = new Vue({
             }
           }, 700)
         }, 1400);
-        
+
 
         if (this.current_question.correct_answer == answerIndex) this.current_progress += 25;
       }
@@ -188,7 +188,7 @@ var app = new Vue({
         this.timer()
       } else {
         let hours = Math.floor(this.time / 3600);
-        let minutes = Math.floor(this.time / 60) % 60; 
+        let minutes = Math.floor(this.time / 60) % 60;
         let seconds = (this.time % 3600) % 60;
       }
     }
