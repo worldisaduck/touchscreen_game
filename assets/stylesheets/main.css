@@ -8,6 +8,10 @@ body {
   font-size: 30px;
 }
 
+a, a:visited {
+  color: #222;
+}
+
 .body-content {
   width: 98%;
   margin-right: auto;
