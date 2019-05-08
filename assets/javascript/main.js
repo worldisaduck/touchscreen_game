@@ -190,6 +190,7 @@ var app = new Vue({
         let hours = Math.floor(this.time / 3600);
         let minutes = Math.floor(this.time / 60) % 60;
         let seconds = (this.time % 3600) % 60;
+        this.sleep(5000)
       }
     }
   }

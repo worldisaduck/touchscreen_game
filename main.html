@@ -27,6 +27,7 @@
               <transition name="question" mode="out-in">
                 <h3 v-show="showQuestion" style="width: 95%; margin: 60px auto; text-align: center;">{{ current_question.text }}</h3>
               </transition>
+              <p style="text-align: center; width: 95%">Time: <span v-html="time"></span></p>
             <div>
           </div>
           <div class="row justify-content-around" style="margin-top: 100px;">
