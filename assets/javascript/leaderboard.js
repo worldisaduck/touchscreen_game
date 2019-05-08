@@ -9,5 +9,10 @@ Vue.component('leaderboard', {
     <div>
       <input v-model="username" placeholder="Enter you name"></input>
     </div>
-  `
+  `,
+  watch: {
+    username: function() {
+      console.log(this.gameStarted);
+    }
+  }
 });

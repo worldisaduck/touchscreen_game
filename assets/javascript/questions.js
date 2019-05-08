@@ -2,11 +2,12 @@ new Vue({
   el: "#questions",
   data: function() {
     return {
+      username: '',
+      stage: 'start',
       gameStarted: false,
       currentProgress: 0,
       showQuestion: true,
       time: 0,
-      gameEnded: false,
       currentSection: 0,
       screenResposive: true,
       currentQuestion: {
@@ -112,7 +113,7 @@ new Vue({
           setTimeout(() => {
             if (this.currentSection == 3) {
               this.sleep(3000);
-              this.gameStarted = false;
+              this.stage = 'leaderboard';
             } else {
               this.changeQuestion();
             }
@@ -154,6 +155,7 @@ new Vue({
       return 'assets/new_images/progress_arrow_' + this.currentProgress + '.png';
     },
     startGame: function() {
+      this.stage = 'game-in-progress';
       this.gameStarted = true;
     },
     sleep: function(delay) {
@@ -185,11 +187,11 @@ new Vue({
     }
   },
   watch: {
-    gameStarted: function(newState, oldState) {
-      if (newState) {
+    stage: function(newState, oldState) {
+      if (newState == 'game-in-progress') {
         this.time = 0;
         this.timer()
-      } else {
+      } else if (newState == 'leaderboard') {
         let hours = Math.floor(this.time / 3600);
         let minutes = Math.floor(this.time / 60) % 60;
         let seconds = (this.time % 3600) % 60;
