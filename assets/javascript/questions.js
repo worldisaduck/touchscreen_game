@@ -112,8 +112,7 @@ new Vue({
           this.showQuestion = false;
           setTimeout(() => {
             if (this.currentSection == 3) {
-              this.sleep(3000);
-              this.stage = 'leaderboard';
+              this.stage = 'result';
             } else {
               this.changeQuestion();
             }
@@ -178,12 +177,19 @@ new Vue({
       this.changeQuestion();
     },
     timer: function() {
-      if (this.gameStarted) {
+      if (this.stage == 'game-in-progress') {
         this.time++
         setTimeout(() => {
           this.timer();
         }, 1000)
       }
+    },
+    leaderboard: function() {
+
+    },
+    saveTime: function() {
+      window.localStorage.setItem(this.username, this.time);
+      this.stage = 'leaderboard'
     }
   },
   watch: {
@@ -191,10 +197,12 @@ new Vue({
       if (newState == 'game-in-progress') {
         this.time = 0;
         this.timer()
-      } else if (newState == 'leaderboard') {
+      } else if (newState == 'result') {
         let hours = Math.floor(this.time / 3600);
         let minutes = Math.floor(this.time / 60) % 60;
         let seconds = (this.time % 3600) % 60;
+      } else if (newState == 'leaderboard') {
+
       }
     }
   }
