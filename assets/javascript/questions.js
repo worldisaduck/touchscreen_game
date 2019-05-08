@@ -194,7 +194,7 @@ new Vue({
 
       for (i in sortedNames) {
         let name = sortedNames[i];
-        sortedLeaderboard[name] = leaderboard[name];
+        sortedLeaderboard[name] = this.formattedTime(leaderboard[name]);
       }
 
       return sortedLeaderboard;
@@ -202,6 +202,16 @@ new Vue({
     saveTime: function() {
       window.localStorage.setItem(this.username, this.time);
       this.stage = 'leaderboard'
+    },
+    formattedTime: function(timeInSeconds) {
+      let hours = Math.floor(timeInSeconds / 3600);
+      let minutes = Math.floor(timeInSeconds / 60) % 60;
+      let seconds = (timeInSeconds % 3600) % 60;
+
+      let secondsString = JSON.stringify(seconds).length > 1 ? seconds : `0${seconds}`;
+      let minutesString = JSON.stringify(minutes) > 1 ? minutes : `0${minutes}`;
+      
+      return `${minutesString}:${secondsString}`
     }
   },
   watch: {
@@ -209,12 +219,6 @@ new Vue({
       if (newState == 'game-in-progress') {
         this.time = 0;
         this.timer()
-      } else if (newState == 'result') {
-        let hours = Math.floor(this.time / 3600);
-        let minutes = Math.floor(this.time / 60) % 60;
-        let seconds = (this.time % 3600) % 60;
-      } else if (newState == 'leaderboard') {
-
       }
     }
   }
