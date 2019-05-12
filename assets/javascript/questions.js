@@ -3,7 +3,8 @@ new Vue({
   data: function() {
     return {
       username: '',
-      stage: 'start',
+      userAnswers: [],
+      stage: 'leaderboard',
       gameStarted: false,
       currentProgress: 0,
       showQuestion: true,
@@ -17,81 +18,81 @@ new Vue({
           {
             text: "3 years after graduating, how much more likely are you to be in a managerial role if you've completed postgraduate studies?",
             answers: ['10%', '15%', '20%'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and undergraduates?',
             answers: ['&pound;2000', '&pound;4000', '&pound;8000'],
-            correct_answer: 1
+            correctAnswer: 1
           },
           {
             text: 'Up to the age of 30, what is the average annual gap in salary between non-graduates and postgraduates?',
             answers: ['&pound;5000', '&pound;7000', '&pound;9000'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: 'What % of first degree graduates go on to further study 6 months after graduating?',
             answers: ['6.1%', '25.8%', '33.1%'],
-            correct_answer: 0
+            correctAnswer: 0
           },
           {
             text: 'What % of first degree graduates were in full or part time employment 6 months after graduating?',
             answers: ['38%', '53%', '67%'],
-            correct_answer: 2
+            correctAnswer: 2
           }
         ],
         [
           {
             text: 'What is the median salary for postgraduates in employment?',
             answers: ['&pound;25000', '&pound;28000', '&pound;33000'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: 'What % of postgraduates are in high-skilled employment?',
             answers: ['56%', '73%', '89%'],
-            correct_answer: 1
+            correctAnswer: 1
           },
           {
             text: 'What % of history graduates go on to take further study?',
             answers: ['21.1%', '25%', '27.5%'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: "Which university's students have the higher median starting salary, 5 years after graduating?",
             answers: ['LSE', 'Oxford', 'Cambridge'],
-            correct_answer: 0
+            correctAnswer: 0
           },
           {
             text: 'Which postgraduates earn the higher starting salary?',
             answers: ['Architecture', 'IT', 'History'],
-            correct_answer: 2
+            correctAnswer: 2
           }
         ],
         [
           {
             text: 'How much did the UK government invest in 2018 to support maths, digital and technical education?',
             answers: ['&pound;120M', '&pound;256M', '&pound;406M'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: 'Which country has the higher median starting salary for graduates?',
             answers: ['Scotland', 'England', 'Wales'],
-            correct_answer: 0
+            correctAnswer: 0
           },
           {
             text: 'What % of the opportunities with the 100 leading graduate recruiters were in business, HR and finance?',
             answers: ['15%', '23%', '37%'],
-            correct_answer: 2
+            correctAnswer: 2
           },
           {
             text: 'Which graduates typically earn the most 5 years after graduating?',
             answers: ['Medicine/Dentistry', 'Economics', 'Computer Science'],
-            correct_answer: 0
+            correctAnswer: 0
           },
           {
             text: 'Which graduates typically earn the most 5 years after graduating?',
             answers: ['Business', 'Law', 'Biological Sciences'],
-            correct_answer: 1
+            correctAnswer: 1
           }
         ]
       ]
@@ -103,6 +104,9 @@ new Vue({
   methods: {
     recordAnswer: function(answerIndex) {
       if (this.screenResposive) {
+        isAnswerCorrect = this.currentQuestion.correctAnswer == answerIndex;
+        this.userAnswers.push(isAnswerCorrect);
+
         this.screenResposive = false;
         this.currentSection++;
 
@@ -121,7 +125,7 @@ new Vue({
         }, 1400);
 
 
-        if (this.currentQuestion.correct_answer == answerIndex) this.currentProgress += 25;
+        if (this.currentQuestion.correctAnswer == answerIndex) this.currentProgress += 25;
       }
     },
     rotateArrow: function(answerIndex) {
@@ -173,6 +177,7 @@ new Vue({
     setupNewGame: function() {
       this.stage = 'start';
       this.username = '';
+      this.userAnswers = [];
       this.currentProgress = 0;
       this.currentSection = 0;
       this.changeQuestion();
@@ -186,21 +191,54 @@ new Vue({
       }
     },
     sortedLeaderboard: function() {
-      let sortedLeaderboard = {};
-      let leaderboard = window.localStorage
-      let names = Object.keys(leaderboard);
+      let leaderboard = {};
+      let sortedLeaderboard = [];
+      let storage = window.localStorage;
+      let nameIds = Object.keys(storage);
 
-      let sortedNames = names.sort((a, b) => { return leaderboard[a] - leaderboard[b] });
+      for (i = 0; i < nameIds.length; i++) {
+        let name = nameIds[i];
+
+        leaderboard[name] = JSON.parse(storage[name]);
+      }
+
+      let sortedNames = nameIds.sort((a, b) => {
+        let a_time = leaderboard[a][2];
+        let b_time = leaderboard[b][2];
+      
+        return a_time - b_time
+      });
+
+      sortedNames = sortedNames.sort((a, b) => {
+        let a_score = this.countCorrectAnswers(leaderboard[a][1]);
+        let b_score = this.countCorrectAnswers(leaderboard[b][1]);
+
+        return b_score - a_score
+      })
 
       for (i in sortedNames) {
-        let name = sortedNames[i];
-        sortedLeaderboard[name] = this.formattedTime(leaderboard[name]);
+        let nameId = sortedNames[i];
+        let data = leaderboard[nameId];
+
+        let username = data[0];
+        let answers = data[1];
+        let time = this.formattedTime(data[2]);
+
+        sortedLeaderboard.push([username, answers, time]);
       }
 
       return sortedLeaderboard;
     },
-    saveTime: function() {
-      window.localStorage.setItem(this.username, this.time);
+    saveResult: function() {
+      let userId = Math.floor(Math.random() * 100000);
+      let sortedScores = this.userAnswers.sort((a, b) => { return b - a });
+      let userResult = JSON.stringify([this.username, sortedScores, this.time]);
+
+      while (window.localStorage.getItem(userId)) {
+        userId = Math.floor(Math.random() * 100000);
+      }
+
+      window.localStorage.setItem(`${this.username}${userId}`, userResult);
       this.stage = 'leaderboard'
     },
     formattedTime: function(timeInSeconds) {
@@ -212,6 +250,14 @@ new Vue({
       let minutesString = JSON.stringify(minutes) > 1 ? minutes : `0${minutes}`;
       
       return `${minutesString}:${secondsString}`
+    },
+    countCorrectAnswers: function(allAnswers) {
+      let correctAnswers = 0;
+      for (i in allAnswers) {
+        if (allAnswers[i]) correctAnswers++
+      }
+
+      return correctAnswers;
     }
   },
   watch: {

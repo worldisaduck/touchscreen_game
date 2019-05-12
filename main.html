@@ -56,7 +56,7 @@
           <input v-model="username" placeholder="Enter you name"></input>
         </div>
         <div class="row justify-content-center">
-          <div @click="saveTime()" style="padding: 15px; background-color: #000000; width: 150px; height: 70px; text-align: center; color: #ffffff;">
+          <div @click="saveResult()" style="padding: 15px; background-color: #000000; width: 150px; height: 70px; text-align: center; color: #ffffff;">
             SUBMIT
           </div>
         </div>
@@ -64,14 +64,20 @@
       
       <div v-else-if="stage == 'leaderboard'">
         <div class="row justify-content-center" style="margin-bottom: 45px;">
-          <div id="leaderboard" class="col-2">
-            <dl v-for="(name, value) in sortedLeaderboard()" style="text-align: center;щo">
-              <dt>{{ value }} - {{ name }}</dt>
+          <div id="leaderboard" class="col-3">
+            <dl v-for="userResult in sortedLeaderboard()" style="text-align: center;щo">
+              <dt>
+                {{ userResult[2] }} - {{ userResult[0] }}
+                <span v-for="answer in userResult[1]" style="margin-left: 10px;">
+                  <i class="fa fa-star" v-if="answer" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" v-else aria-hidden="true"></i>
+                </span>
+              </dt>
             </dl>
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-2">
+          <div class="col-3">
             <div @click="setupNewGame()" style="margin: 0px auto; padding: 15px; background-color: #000000; width: 200px; height: 70px; text-align: center; color: #ffffff;">
               NEW GAME
             </div>
@@ -83,6 +89,7 @@
       <p class="terms"><a href="./terms.html">Terms and Conditions</a></p>
     </footer>
 
+    <link rel="stylesheet" href="assets/stylesheets/font-awesome.min.css">
     <link rel="stylesheet" href="assets/stylesheets/bootstrap-grid.min.css">
     <link rel="stylesheet" href="assets/stylesheets/main.css">
     <script src="assets/javascript/vue.min.js"></script>
