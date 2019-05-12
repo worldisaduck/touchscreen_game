@@ -196,12 +196,14 @@ new Vue({
       let storage = window.localStorage;
       let nameIds = Object.keys(storage);
 
+      // transformation of json from local storage to array with user's result for each user
       for (i = 0; i < nameIds.length; i++) {
         let name = nameIds[i];
 
         leaderboard[name] = JSON.parse(storage[name]);
       }
 
+      // sorting by time
       let sortedNames = nameIds.sort((a, b) => {
         let a_time = leaderboard[a][2];
         let b_time = leaderboard[b][2];
@@ -209,6 +211,7 @@ new Vue({
         return a_time - b_time
       });
 
+      // sorting by correct answers
       sortedNames = sortedNames.sort((a, b) => {
         let a_score = this.countCorrectAnswers(leaderboard[a][1]);
         let b_score = this.countCorrectAnswers(leaderboard[b][1]);
@@ -216,6 +219,7 @@ new Vue({
         return b_score - a_score
       })
 
+      // tuple that contains user's name, correct answers and total time for each user 
       for (i in sortedNames) {
         let nameId = sortedNames[i];
         let data = leaderboard[nameId];
