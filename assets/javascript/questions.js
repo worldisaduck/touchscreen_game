@@ -4,7 +4,7 @@ new Vue({
     return {
       username: '',
       userAnswers: [],
-      stage: 'leaderboard',
+      stage: 'start',
       gameStarted: false,
       currentProgress: 0,
       showQuestion: true,
